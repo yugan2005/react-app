@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Radium, { StyleRoot } from 'radium';
+import styled from 'styled-components'
 import './App.css';
 import Person from './Person/Person';
 import Car from './Car/Car';
@@ -74,18 +73,19 @@ class App extends Component {
 
   render = () => {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'yellow'
+    const StyledButton = styled.button`
+      background-color: ${this.state.showPeople ? 'red' : 'green'};
+      color: ${this.state.showPeople ? 'black' : 'white'};
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: ${this.state.showPeople ? 'salmon' : 'lightgreen'};
+        color: ${this.state.showPeople ? 'grey' : 'yellow'}
       }
-    };
+    }`;
 
     let peopleDiv = null
 
@@ -101,12 +101,6 @@ class App extends Component {
           ))}
         </div>
       );
-      style.backgroundColor = 'red';
-      style.color = 'black';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'grey'
-      }
     }
 
     let charComponents = null
@@ -131,27 +125,24 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App</h1>
-          <p className={pClasses.join(' ')}>It is really working!</p>
-          <hr></hr>
-          <button 
-            style={style}
-            onClick={this.toggleShowMorePeopleHandler}>Toggle showing People</button>
-          {peopleDiv}
-          <hr></hr>
-          <Car maker={this.state.cars[0].maker} 
-            year={this.state.cars[0].year} onchange={this.makerChangeHandler}></Car>
-          <hr></hr>
-          <input type="text" onChange={this.textInputHandler} 
-            value={this.state.textInput}></input>
-          <p>input length: {this.state.textInputLength}</p>
-          <ValidationComponent textLength={this.state.textInputLength}></ValidationComponent>
-          {charComponents}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={pClasses.join(' ')}>It is really working!</p>
+        <hr></hr>
+        <StyledButton
+          onClick={this.toggleShowMorePeopleHandler}>Toggle showing People</StyledButton>
+        {peopleDiv}
+        <hr></hr>
+        <Car maker={this.state.cars[0].maker} 
+          year={this.state.cars[0].year} onchange={this.makerChangeHandler}></Car>
+        <hr></hr>
+        <input type="text" onChange={this.textInputHandler} 
+          value={this.state.textInput}></input>
+        <p>input length: {this.state.textInputLength}</p>
+        <ValidationComponent textLength={this.state.textInputLength}></ValidationComponent>
+        {charComponents}
+      </div>
     )}
 }
 
-export default Radium(App);
+export default App;
