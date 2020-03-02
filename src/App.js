@@ -6,6 +6,21 @@ import Car from './Car/Car';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
 
+const StyledButton = styled.button`
+  background-color: ${(props) => props.alt ? 'red' : 'green'};
+  color: ${(props) => props.alt ? 'black' : 'white'};
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.alt ? 'salmon' : 'lightgreen'};
+    color: ${(props) => props.alt ? 'grey' : 'yellow'}
+  }
+}`;
+
+
 class App extends Component {
 
   state = {
@@ -73,20 +88,6 @@ class App extends Component {
 
   render = () => {
 
-    const StyledButton = styled.button`
-      background-color: ${this.state.showPeople ? 'red' : 'green'};
-      color: ${this.state.showPeople ? 'black' : 'white'};
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${this.state.showPeople ? 'salmon' : 'lightgreen'};
-        color: ${this.state.showPeople ? 'grey' : 'yellow'}
-      }
-    }`;
-
     let peopleDiv = null
 
     if (this.state.showPeople) {
@@ -129,7 +130,7 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <p className={pClasses.join(' ')}>It is really working!</p>
         <hr></hr>
-        <StyledButton
+        <StyledButton alt={this.state.showPeople}
           onClick={this.toggleShowMorePeopleHandler}>Toggle showing People</StyledButton>
         {peopleDiv}
         <hr></hr>
