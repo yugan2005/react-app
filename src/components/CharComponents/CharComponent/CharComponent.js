@@ -1,8 +1,9 @@
 import React from 'react';
-import './CharComponent.css';
+import classes from './CharComponent.css';
 
 const charComponent = (props) => (
-    <div className="CharComponent" onClick={props.onclick}>
+    <div className={classes.CharComponent} 
+    onClick={props.onclick}>
         {props.character}
     </div>
 )
